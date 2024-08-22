@@ -15,8 +15,9 @@ const getSingleToDo = asyncWrapper(async (req, res, next) => {
 const getAllTodos = asyncWrapper(async (req, res) => {
   // get all the todos from DB
   const todos = await TodoModel.find({});
-  console.log(todos);
-  res.status(200).json({ message: todos });
+  // console.log(todos);
+  // res.status(200).json({ message: todos });
+  res.render("todospage.ejs", { todos });
 });
 
 const createToDo = asyncWrapper(async (req, res, next) => {
@@ -25,7 +26,9 @@ const createToDo = asyncWrapper(async (req, res, next) => {
     next(new CustomError(`Couldn't create todo`, 404));
   }
   // add to db
-  res.status(201).json({ message: ToDo });
+  // res.status(201).json({ message: ToDo });
+  // res.render("createpage.ejs");
+  res.redirect("/");
 });
 
 const deleteToDo = asyncWrapper(async (req, res) => {
@@ -35,7 +38,8 @@ const deleteToDo = asyncWrapper(async (req, res) => {
   if (!deletedTodo) {
     res.status(404).json({ message: "Not found" });
   }
-  res.status(200).json({ message: "TODO deleted" });
+  // res.status(200).json({ message: "TODO deleted" });
+  res.redirect("todospage.ejs");
 });
 
 const updateToDo = asyncWrapper(async (req, res) => {

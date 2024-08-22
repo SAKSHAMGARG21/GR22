@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Create a todo</h1>
+    <form action="/api/v1/todos" method="post">
+        <label for="titleinput">Title:</label>
+        <input type="text"  id="titleinput" name="title" required>
+        <label for="descriptioninput">Add  the description</label>
+        <input type="text" name="description" id="descriptioninput">
+        <button type="submit">Add todo</button>
+    </form>
+</body>
+</html>

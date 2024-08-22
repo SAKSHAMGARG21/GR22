@@ -15,7 +15,7 @@ const getSingleToDo = asyncWrapper(async (req, res, next) => {
 const getAllTodos = asyncWrapper(async (req, res) => {
   // get all the todos from DB
   const todos = await TodoModel.find({});
-  console.log(todos);
+  // console.log(todos);
   res.status(200).json({ message: todos });
 });
 
@@ -41,7 +41,7 @@ const deleteToDo = asyncWrapper(async (req, res) => {
 const updateToDo = asyncWrapper(async (req, res) => {
   const { id } = req.params;
   const updatedData = req.body;
-  const updatedToDo = await ToDoModel.findByIdAndUpdate(id, updatedData, {
+  const updatedToDo = await TodoModel.findByIdAndUpdate(id, updatedData, {
     new: true,
     runValidators: true,
   });

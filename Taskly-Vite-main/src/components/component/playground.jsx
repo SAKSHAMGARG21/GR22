@@ -19,7 +19,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { format, set } from "date-fns";
+import { compareAsc, format, set } from "date-fns";
 import { Calendar } from "@/components/ui/calendar";
 import {
   Popover,
@@ -190,15 +190,25 @@ export function Playground() {
     // axios delete
   };
 
-  const handleToggleTodo = (index) => {
+  const handleToggleTodo = async (index) => {
     const updatedTodos = [...todos];
     updatedTodos[index].completed = !updatedTodos[index].completed;
     setTodos(updatedTodos);
-    console.log("up", updatedTodos);
-    toast({
-      title: "Todo Updated",
-      description: "Your todo has been updated successfully",
-    });
+    const id = todos[index]._id;
+    try {
+      const res = await axios.patch(`${API_URL}${id}`, {
+        completed: updatedTodos[index].completed,
+      });
+      if (res.status === 200) {
+        toast({
+          title: "todo Updated",
+          description: "Your todo has been updated Successfully",
+        });
+      }
+    } catch (error) {
+      console.log(error);
+    }
+
   };
 
   // on any change in todos, print it

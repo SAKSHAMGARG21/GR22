@@ -194,21 +194,11 @@ export function Playground() {
     const updatedTodos = [...todos];
     updatedTodos[index].completed = !updatedTodos[index].completed;
     setTodos(updatedTodos);
-    const id = todos[index]._id;
-    try {
-      const res = await axios.patch(`${API_URL}${id}`, {
-        completed: updatedTodos[index].completed,
-      });
-      if (res.status === 200) {
-        toast({
-          title: "todo Updated",
-          description: "Your todo has been updated Successfully",
-        });
-      }
-    } catch (error) {
-      console.log(error);
-    }
-
+    console.log("up", updatedTodos);
+    toast({
+      title: "Todo Updated",
+      description: "Your todo has been updated successfully",
+    });
   };
 
   // on any change in todos, print it

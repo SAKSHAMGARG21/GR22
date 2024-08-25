@@ -195,10 +195,20 @@ export function Playground() {
     updatedTodos[index].completed = !updatedTodos[index].completed;
     setTodos(updatedTodos);
     console.log("up", updatedTodos);
-    toast({
-      title: "Todo Updated",
-      description: "Your todo has been updated successfully",
-    });
+    const id = todos[index]._id;
+    try {
+      const res = await axios.patch(`${API_URL}${id}`, {
+        completed: updatedTodos[index].completed,
+      });
+      if (res.status === 200) {
+        toast({
+          title: "todo Updated",
+          description: "Your todo has been updated Successfully",
+        });
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   // on any change in todos, print it
@@ -253,11 +263,10 @@ export function Playground() {
           todos.map((todo, index) => (
             <div
               key={index}
-              className={`grid grid-cols-[auto_1fr_auto] items-center gap-4 ${
-                todo.completed
-                  ? "opacity-50 line-through text-gray-500 dark:text-gray-400"
-                  : ""
-              }`}
+              className={`grid grid-cols-[auto_1fr_auto] items-center gap-4 ${todo.completed
+                ? "opacity-50 line-through text-gray-500 dark:text-gray-400"
+                : ""
+                }`}
             >
               <Checkbox
                 checked={todo.completed}

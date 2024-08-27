@@ -1,18 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Todo list</title>
 </head>
+
 <body>
     <h1>List of Todos</h1>
     <% todos.forEach(todo=>{ %>
-        <form action="/api/v1/todos" method="dialog">
-            <h3><%= todo.title %></h3>
-            <p><%= todo.description %></p>
-            <button type="submit">Delete todo</button>
+        <h3>
+            <%= todo.title %>
+        </h3>
+        <p>
+            <%= todo.description %>
+        </p>
+        <p>
+        <form action="/api/v1/todos/update/<%= todo._id %>" method="post">
+            <input type="text" name="description" id="" placeholder="change description of the todo" width="50" height="100">
+            <button type="submit">Update todo</button>
         </form>
-    <% }) %>
+        </p>
+        <button><a href="/api/v1/todos/delete/<%= todo._id %>">Delete todo</a></button>
+        <% }) %>
 </body>
+
 </html>

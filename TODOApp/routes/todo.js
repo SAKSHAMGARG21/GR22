@@ -12,9 +12,9 @@ router.post("/", createToDo);
 // READ/ GET SINGLE TODO
 router.get("/:id", getSingleToDo);
 // UPDATE/ PATCH TODO
-router.patch("/:id", updateToDo);
+router.post("/update/:id", updateToDo);
 // DELETE/ delete TODO
-router.delete("/:id", deleteToDo);
+router.get("/delete/:id",deleteToDo); 
 // GET ALL TODOS
 router.get("/", getAllTodos);
 
